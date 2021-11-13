@@ -6,13 +6,17 @@ import CurrencyComponent from "./CurrencyComponent";
 
 function App() {
   // Manage an array of available currencies
-  const [currencyOptions, SetCurrencyOptions] = useState([]);
-
+  const [currencyOptions, setCurrencyOptions] = useState([]);
   // Set Base currency
-  const [fromCurrency, setFromCurrency] = useState([]);
-
+  const [fromCurrency, setFromCurrency] = useState();
   // Set convertinng currency
-  const [toCurrency, setToCurrency] = useState([]);
+  const [toCurrency, setToCurrency] = useState();
+  // Set amount
+  const [amount, setAmount] = useState(1);
+  // Track amount that needs to be changed
+  const [amountOfBaseCurrency, setAmountOfBaseCurrency] = useState(true);
+  // Set exchange rate
+  const [exchangeRate, setExchangeRate] = useState();
 
   // Initialize app by fetching the currency data and notifying other components
   useEffect(() => {
@@ -31,7 +35,7 @@ function App() {
          * */
 
         // For currency options get list of available currencies
-        SetCurrencyOptions([
+        setCurrencyOptions([
           currencyData.base,
           ...Object.keys(currencyData.rates),
         ]);
@@ -42,8 +46,32 @@ function App() {
         // Set converting currency
         const convertingCurrency = Object.keys(currencyData.rates)[0];
         setToCurrency(convertingCurrency);
+
+        // Set exchange rate
+        setExchangeRate(currencyData.rates[convertingCurrency]);
       });
   }, []);
+
+  // The amount of each currency
+  let baseAmount, toAmount;
+  // Changing amount of each text field based on which one was updated by the user
+  if (amountOfBaseCurrency) {
+    baseAmount = amount;
+    toAmount = amount * exchangeRate;
+  } else {
+    baseAmount = amount / exchangeRate;
+    toAmount = amount;
+  }
+
+  const onChangeBaseAmount = (e) => {
+    setAmount(e.target.value);
+    setAmountOfBaseCurrency(true);
+  };
+
+  const onChangeToAmount = (e) => {
+    setAmount(e.target.value);
+    setAmountOfBaseCurrency(false);
+  };
 
   return (
     <>
@@ -53,12 +81,18 @@ function App() {
           isBase={true}
           currencyOptions={currencyOptions}
           selectedCurrency={fromCurrency}
+          onChangeCurrency={(e) => setFromCurrency(e.target.value)}
+          amount={baseAmount}
+          onChangeAmount={onChangeBaseAmount}
         />
         <div>Icon</div>
         <CurrencyComponent
           isBase={false}
           currencyOptions={currencyOptions}
           selectedCurrency={toCurrency}
+          onChangeCurrency={(e) => setToCurrency(e.target.value)}
+          amount={toAmount}
+          onChangeAmount={onChangeToAmount}
         />
       </div>
     </>
