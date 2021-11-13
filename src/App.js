@@ -5,7 +5,14 @@ import { API_URL } from "./utils/urls";
 import CurrencyComponent from "./CurrencyComponent";
 
 function App() {
+  // Manage an array of available currencies
   const [currencyOptions, SetCurrencyOptions] = useState([]);
+
+  // Set Base currency
+  const [fromCurrency, setFromCurrency] = useState([]);
+
+  // Set convertinng currency
+  const [toCurrency, setToCurrency] = useState([]);
 
   // Initialize app by fetching the currency data and notifying other components
   useEffect(() => {
@@ -23,11 +30,18 @@ function App() {
          *
          * */
 
-        // For currency options get the base currency and list of other currencies
+        // For currency options get list of available currencies
         SetCurrencyOptions([
           currencyData.base,
           ...Object.keys(currencyData.rates),
         ]);
+
+        // Set base currency
+        setFromCurrency(currencyData.base);
+
+        // Set converting currency
+        const convertingCurrency = Object.keys(currencyData.rates)[0];
+        setToCurrency(convertingCurrency);
       });
   }, []);
 
@@ -35,9 +49,17 @@ function App() {
     <>
       <h1>Shumba Money Exchange rate calculator</h1>
       <div>
-        <CurrencyComponent currencyOptions={currencyOptions} />
+        <CurrencyComponent
+          isBase={true}
+          currencyOptions={currencyOptions}
+          selectedCurrency={fromCurrency}
+        />
         <div>Icon</div>
-        <CurrencyComponent currencyOptions={currencyOptions} />
+        <CurrencyComponent
+          isBase={false}
+          currencyOptions={currencyOptions}
+          selectedCurrency={toCurrency}
+        />
       </div>
     </>
   );
