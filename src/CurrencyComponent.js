@@ -1,4 +1,5 @@
 import React from "react";
+import { ReactComponent as UKLogo } from "./assets/uk.svg";
 
 export default function CurrencyComponent(props) {
   /**
@@ -25,13 +26,19 @@ export default function CurrencyComponent(props) {
       <select value={selectedCurrency} onChange={onChangeCurrency}>
         {currencyOptions.map((option) => (
           <option key={option} value={option}>
-            {option === "USD" && "USD - United Stated Dollar"}
+            {option === "USD" && (
+              <div>
+                {/* <UKLogo className="country-flag" /> */}
+                USD - United Stated Dollar
+              </div>
+            )}
             {option === "GBP" && "GBP - Great British Pound"}
             {option === "EUR" && "EUR - Euro"}
             {option === "ZAR" && "ZAR - South African Rand"}
           </option>
         ))}
       </select>
+
       <input type="number" value={amount} onChange={onChangeAmount} />
     </div>
   );

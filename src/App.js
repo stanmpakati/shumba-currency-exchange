@@ -33,7 +33,6 @@ function App() {
          * * * Value: exchange rate relative to the base
          *
          * */
-        console.log(currencyData);
         // For currency options get list of available currencies
         const availableCurrencies = [
           currencyData.query.base_currency,
@@ -100,7 +99,7 @@ function App() {
   return (
     <>
       <h1>Shumba Money Exchange rate calculator</h1>
-      <div>
+      <div className="container">
         <div>
           <CurrencyComponent
             isBase={true}
