@@ -35,16 +35,19 @@ function App() {
          * */
         console.log(currencyData);
         // For currency options get list of available currencies
-        setCurrencyOptions([
+        const availableCurrencies = [
           currencyData.query.base_currency,
-          ...Object.keys(currencyData.data),
-        ]);
+          ...Object.keys(currencyData.data).filter((value) =>
+            ["USD", "GBP", "EUR", "ZAR"].includes(value)
+          ),
+        ];
+        setCurrencyOptions(availableCurrencies);
 
         // Set base currency
         setFromCurrency(currencyData.query.base_currency);
 
         // Set converting currency
-        const convertingCurrency = Object.keys(currencyData.data)[0];
+        const convertingCurrency = availableCurrencies[1];
         setToCurrency(convertingCurrency);
 
         // Set exchange rate
@@ -52,9 +55,17 @@ function App() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   fetch
-  // }, [fromCurrency, toCurrency])
+  useEffect(() => {
+    if (fromCurrency && fromCurrency)
+      fetch(`${API_URL}&base_currency=${fromCurrency}`)
+        .then((res) => res.json())
+        .then((currencyData) => setExchangeRate(currencyData.data[toCurrency]));
+  }, [fromCurrency, toCurrency]);
+
+  const onChangeBaseAmount = (e) => {
+    setAmount(e.target.value);
+    setAmountOfBaseCurrency(true);
+  };
 
   // The amount of each currency
   let baseAmount, toAmount;
@@ -67,11 +78,6 @@ function App() {
     toAmount = amount;
   }
 
-  const onChangeBaseAmount = (e) => {
-    setAmount(e.target.value);
-    setAmountOfBaseCurrency(true);
-  };
-
   const onChangeToAmount = (e) => {
     setAmount(e.target.value);
     setAmountOfBaseCurrency(false);
@@ -81,23 +87,28 @@ function App() {
     <>
       <h1>Shumba Money Exchange rate calculator</h1>
       <div>
-        <CurrencyComponent
-          isBase={true}
-          currencyOptions={currencyOptions}
-          selectedCurrency={fromCurrency}
-          onChangeCurrency={(e) => setFromCurrency(e.target.value)}
-          amount={baseAmount}
-          onChangeAmount={onChangeBaseAmount}
-        />
-        <div>Icon</div>
-        <CurrencyComponent
-          isBase={false}
-          currencyOptions={currencyOptions}
-          selectedCurrency={toCurrency}
-          onChangeCurrency={(e) => setToCurrency(e.target.value)}
-          amount={toAmount}
-          onChangeAmount={onChangeToAmount}
-        />
+        <div>
+          <CurrencyComponent
+            isBase={true}
+            currencyOptions={currencyOptions}
+            selectedCurrency={fromCurrency}
+            onChangeCurrency={(e) => setFromCurrency(e.target.value)}
+            amount={baseAmount}
+            onChangeAmount={onChangeBaseAmount}
+          />
+          <div>Icon</div>
+          <CurrencyComponent
+            isBase={false}
+            currencyOptions={currencyOptions}
+            selectedCurrency={toCurrency}
+            onChangeCurrency={(e) => setToCurrency(e.target.value)}
+            amount={toAmount}
+            onChangeAmount={onChangeToAmount}
+          />
+        </div>
+        <p>
+          1 {fromCurrency} = {exchangeRate} {toCurrency}
+        </p>
       </div>
     </>
   );
