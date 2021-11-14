@@ -25,7 +25,10 @@ export default function CurrencyComponent(props) {
       <select value={selectedCurrency} onChange={onChangeCurrency}>
         {currencyOptions.map((option) => (
           <option key={option} value={option}>
-            {option}
+            {option === "USD" && "USD - United Stated Dollar"}
+            {option === "GBP" && "GBP - Great British Pound"}
+            {option === "EUR" && "EUR - Euro"}
+            {option === "ZAR" && "ZAR - South African Rand"}
           </option>
         ))}
       </select>
