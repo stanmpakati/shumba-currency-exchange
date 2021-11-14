@@ -1,2 +1,2 @@
 export const API_URL =
-  "http://api.exchangeratesapi.io/v1/latest?access_key=9f3ee5958f05a622536e80ab84ebfc3f&symbols=ZAR,USD,GBP,CNY&format=1";
+  "https://freecurrencyapi.net/api/v2/latest?apikey=5cb524a0-44c8-11ec-97c7-17875814f6a5";

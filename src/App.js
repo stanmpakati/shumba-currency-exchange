@@ -33,24 +33,28 @@ function App() {
          * * * Value: exchange rate relative to the base
          *
          * */
-
+        console.log(currencyData);
         // For currency options get list of available currencies
         setCurrencyOptions([
-          currencyData.base,
-          ...Object.keys(currencyData.rates),
+          currencyData.query.base_currency,
+          ...Object.keys(currencyData.data),
         ]);
 
         // Set base currency
-        setFromCurrency(currencyData.base);
+        setFromCurrency(currencyData.query.base_currency);
 
         // Set converting currency
-        const convertingCurrency = Object.keys(currencyData.rates)[0];
+        const convertingCurrency = Object.keys(currencyData.data)[0];
         setToCurrency(convertingCurrency);
 
         // Set exchange rate
-        setExchangeRate(currencyData.rates[convertingCurrency]);
+        setExchangeRate(currencyData.data[convertingCurrency]);
       });
   }, []);
+
+  // useEffect(() => {
+  //   fetch
+  // }, [fromCurrency, toCurrency])
 
   // The amount of each currency
   let baseAmount, toAmount;
