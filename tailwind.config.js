@@ -5,7 +5,9 @@ module.exports = {
     container: {
       center: true,
     },
-    extend: {},
+    // colors: {
+    //   "s-green": "#006063",
+    // },
   },
   variants: {
     extend: {},

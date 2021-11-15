@@ -23,13 +23,32 @@ export default function CurrencyComponent(props) {
   } = props;
 
   const currencies = [
-    { value: "USD", name: "United States Dollar", avatar: "./assets/usa.svg" },
-    { value: "GBP", name: "Great Britain Pound", avatar: "./assets/uk.svg" },
-    { value: "EUR", name: "Euro", avatar: "./assets/eu.svg" },
-    { value: "ZAR", name: "South African Rand", avatar: "./assets/zar.svg" },
+    {
+      value: "USD",
+      name: "United States Dollar",
+      avatar: "./assets/usa.svg",
+      symbol: "$",
+    },
+    {
+      value: "GBP",
+      name: "Great Britain Pound",
+      avatar: "./assets/uk.svg",
+      symbol: "£",
+    },
+    { value: "EUR", name: "Euro", avatar: "./assets/eu.svg", symbol: "€" },
+    {
+      value: "ZAR",
+      name: "South African Rand",
+      avatar: "./assets/zar.svg",
+      symbol: "R",
+    },
   ];
 
-  const varia = currencies.find(
+  const usedCurrencyObjects = currencies.filter(
+    (currency) => currencies.value !== selectedCurrency
+  );
+
+  const currencyObject = currencies.find(
     (currency) => currency.value === selectedCurrency
   );
 
@@ -37,21 +56,14 @@ export default function CurrencyComponent(props) {
     <div className="flex flex-col">
       <p className="mb-4">{isBase ? "From" : "To"}</p>
       {/* <img src={uKLogo} /> */}
-      {/* <Select
-        placeholder={selectedCurrency}
-        defaultValue={selectedCurrency}
-        options={currencies}
-        isClearable={false}
-        isSearchable={false}
-        onChange={onChangeCurrency}
-      /> */}
       <SelectMenu
-        currencies={currencies}
-        selectedCurrency={varia}
+        currencies={usedCurrencyObjects}
+        selectedCurrency={currencyObject}
         onChangeCurrency={onChangeCurrency}
       />
 
-      <div class="mt-2 flex items-center border-b border-green-500 py-2">
+      <div className="mt-2 flex items-center border-b border-green-500 py-2">
+        <span className="ml-2 font-bold">{currencyObject.symbol}</span>
         <input
           type="number"
           value={amount && amount}
@@ -62,18 +74,3 @@ export default function CurrencyComponent(props) {
     </div>
   );
 }
-
-// {currencyOptions.map((option) => (
-//   <option key={option} value={option}>
-//     {option === "USD" && (
-//       <div>
-//         {/* <UKLogo className="country-flag" /> */}
-//         USD - United Stated Dollar
-//       </div>
-//     )}
-//     {option === "GBP" && "GBP - Great British Pound"}
-//     {option === "EUR" && "EUR - Euro"}
-//     {option === "ZAR" && "ZAR - South African Rand"}
-//   </option>
-// ))}
-// </Select>

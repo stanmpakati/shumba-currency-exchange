@@ -16,7 +16,7 @@ function App() {
   // Set amount
   const [amount, setAmount] = useState(1);
   // Track amount that needs to be changed
-  const [amountOfBaseCurrency, setAmountOfBaseCurrency] = useState(true);
+  const [changingBase, setchangingBaseCurrency] = useState(true);
   // Set exchange rate
   const [exchangeRate, setExchangeRate] = useState();
 
@@ -74,13 +74,13 @@ function App() {
 
   const onChangeBaseAmount = (e) => {
     setAmount(e.target.value);
-    setAmountOfBaseCurrency(true);
+    setchangingBaseCurrency(true);
   };
 
   // The amount of each currency
   let baseAmount, toAmount;
   // Changing amount of each text field based on which one was updated by the user
-  if (amountOfBaseCurrency) {
+  if (changingBase) {
     baseAmount = amount;
     toAmount = amount * exchangeRate;
   } else {
@@ -90,7 +90,7 @@ function App() {
 
   const onChangeToAmount = (e) => {
     setAmount(e.target.value);
-    setAmountOfBaseCurrency(false);
+    setchangingBaseCurrency(false);
   };
 
   function switchCurrencies() {
@@ -100,6 +100,14 @@ function App() {
     let temp = fromCurrency;
     setFromCurrency(toCurrency);
     setToCurrency(temp);
+  }
+
+  function resetAmounts() {
+    /*
+     * function to
+     */
+    setchangingBaseCurrency(true);
+    setAmount(1);
   }
 
   return (
@@ -126,7 +134,7 @@ function App() {
             <div className="flex-grow-0 flex items-center justify-center mx-4 my-4 md:my-0">
               <button
                 onClick={switchCurrencies}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 rounded-full"
+                className="bg-red-600 hover:bg-red-800 text-white font-bold py-3 px-3 rounded-full"
               >
                 <svg
                   width="32"
@@ -157,9 +165,27 @@ function App() {
               />
             </div>
           </div>
-          <p className="text-center">
-            1 {fromCurrency} = {exchangeRate} {toCurrency}
-          </p>
+
+          <div className="flex justify-between ">
+            <span className="text-xs text-gray-500">
+              1 {fromCurrency} = {exchangeRate} {toCurrency}
+            </span>
+            <button
+              onClick={resetAmounts}
+              className="flex items-center hover:bg-gray-200 px-2 py-1"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="10.12"
+                height="10.54"
+                viewBox="0 0 40.5 42.17"
+                className="mr-1"
+              >
+                <path d="M29.4,2.65A20.85,20.85,0,0,0,8,3.64L4.92.59A2,2,0,0,0,1.5,2V13.18a2,2,0,0,0,2,2H14.67a2,2,0,0,0,1.42-3.42L13.81,9.48A13,13,0,1,1,7.68,26.56a2,2,0,0,0-2.43-1L1.43,26.66A2,2,0,0,0,.15,29.32,21,21,0,1,0,29.4,2.65Z" />
+              </svg>
+              reset
+            </button>
+          </div>
         </div>
       )}
     </>
