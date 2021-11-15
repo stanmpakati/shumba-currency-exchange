@@ -35,7 +35,7 @@ export default function CurrencyComponent(props) {
 
   return (
     <div className="flex flex-col">
-      <p>{isBase ? "From" : "To"}</p>
+      <p className="mb-4">{isBase ? "From" : "To"}</p>
       {/* <img src={uKLogo} /> */}
       {/* <Select
         placeholder={selectedCurrency}
@@ -51,7 +51,14 @@ export default function CurrencyComponent(props) {
         onChangeCurrency={onChangeCurrency}
       />
 
-      <input type="number" value={amount && amount} onChange={onChangeAmount} />
+      <div class="mt-2 flex items-center border-b border-green-500 py-2">
+        <input
+          type="number"
+          value={amount && amount}
+          onChange={onChangeAmount}
+          className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+        />
+      </div>
     </div>
   );
 }

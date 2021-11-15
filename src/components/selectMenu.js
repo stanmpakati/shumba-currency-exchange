@@ -23,6 +23,7 @@ export default function SelectMenu(props) {
                   className="flex-shrink-0 h-6 w-6 rounded-full"
                 /> */}
                 <span className="ml-3 block truncate">
+                  <strong>{selectedCurrency.value} - </strong>
                   {selectedCurrency.name}
                 </span>
               </span>
@@ -61,6 +62,7 @@ export default function SelectMenu(props) {
                               "ml-3 block truncate"
                             )}
                           >
+                            <strong>{currency.value} - </strong>
                             {currency.name}
                           </span>
                         </div>

@@ -110,27 +110,52 @@ function App() {
       {isLoading ? (
         <p>Loading</p>
       ) : (
-        <div className="container bg-gray-50 py-4 px-8 rounded-2xl">
-          <div className="pb-4">
-            <CurrencyComponent
-              isBase={true}
-              currencyOptions={currencyOptions}
-              selectedCurrency={fromCurrency}
-              onChangeCurrency={(data) => setFromCurrency(data.value)}
-              amount={baseAmount}
-              onChangeAmount={onChangeBaseAmount}
-            />
-            <div>
-              <button onClick={switchCurrencies}>Switch</button>
+        <div className="container mx-auto bg-gray-50 py-4 px-8 rounded-2xl">
+          <div className="mb-8 flex flex-col md:flex-row">
+            <div className="flex-grow">
+              <CurrencyComponent
+                isBase={true}
+                currencyOptions={currencyOptions}
+                selectedCurrency={fromCurrency}
+                onChangeCurrency={(data) => setFromCurrency(data.value)}
+                amount={baseAmount}
+                onChangeAmount={onChangeBaseAmount}
+              />
             </div>
-            <CurrencyComponent
-              isBase={false}
-              currencyOptions={currencyOptions}
-              selectedCurrency={toCurrency}
-              onChangeCurrency={(data) => setToCurrency(data.value)}
-              amount={toAmount}
-              onChangeAmount={onChangeToAmount}
-            />
+
+            <div className="flex-grow-0 flex items-center justify-center mx-4 my-4 md:my-0">
+              <button
+                onClick={switchCurrencies}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 rounded-full"
+              >
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M6.99 11L3 15L6.99 19V16H14V14H6.99V11ZM21 9L17.01 5V8H10V10H17.01V13L21 9Z"
+                    fill="#FFFFFF"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div className="flex-grow">
+              <CurrencyComponent
+                isBase={false}
+                currencyOptions={currencyOptions}
+                selectedCurrency={toCurrency}
+                onChangeCurrency={(data) => setToCurrency(data.value)}
+                amount={toAmount}
+                onChangeAmount={onChangeToAmount}
+                className="flex-grow"
+              />
+            </div>
           </div>
           <p className="text-center">
             1 {fromCurrency} = {exchangeRate} {toCurrency}
