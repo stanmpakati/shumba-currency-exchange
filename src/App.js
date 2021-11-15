@@ -5,6 +5,8 @@ import { API_URL } from "./utils/urls";
 import CurrencyComponent from "./CurrencyComponent";
 
 function App() {
+  // Loading state indicator
+  const [isLoading, setIsLoading] = useState(true);
   // Manage an array of available currencies
   const [currencyOptions, setCurrencyOptions] = useState([]);
   // Set Base currency
@@ -33,6 +35,7 @@ function App() {
          * * * Value: exchange rate relative to the base
          *
          * */
+
         // For currency options get list of available currencies
         const availableCurrencies = [
           currencyData.query.base_currency,
@@ -52,6 +55,9 @@ function App() {
 
         // Set exchange rate
         setExchangeRate(currencyData.data[convertingCurrency]);
+
+        // Is loading is false
+        setIsLoading(false);
       });
   }, []);
 
@@ -98,33 +104,39 @@ function App() {
 
   return (
     <>
-      <h1>Shumba Money Exchange rate calculator</h1>
-      <div className="container">
-        <div>
-          <CurrencyComponent
-            isBase={true}
-            currencyOptions={currencyOptions}
-            selectedCurrency={fromCurrency}
-            onChangeCurrency={(e) => setFromCurrency(e.target.value)}
-            amount={baseAmount}
-            onChangeAmount={onChangeBaseAmount}
-          />
-          <div>
-            <button onClick={switchCurrencies}>Switch</button>
+      <h1 className="font-bold text-blue-300 text-xl absolute top-10">
+        Shumba Money Exchange rate calculator
+      </h1>
+      {isLoading ? (
+        <p>Loading</p>
+      ) : (
+        <div className="container bg-gray-50 py-4 px-8 rounded-2xl">
+          <div className="pb-4">
+            <CurrencyComponent
+              isBase={true}
+              currencyOptions={currencyOptions}
+              selectedCurrency={fromCurrency}
+              onChangeCurrency={(data) => setFromCurrency(data.value)}
+              amount={baseAmount}
+              onChangeAmount={onChangeBaseAmount}
+            />
+            <div>
+              <button onClick={switchCurrencies}>Switch</button>
+            </div>
+            <CurrencyComponent
+              isBase={false}
+              currencyOptions={currencyOptions}
+              selectedCurrency={toCurrency}
+              onChangeCurrency={(data) => setToCurrency(data.value)}
+              amount={toAmount}
+              onChangeAmount={onChangeToAmount}
+            />
           </div>
-          <CurrencyComponent
-            isBase={false}
-            currencyOptions={currencyOptions}
-            selectedCurrency={toCurrency}
-            onChangeCurrency={(e) => setToCurrency(e.target.value)}
-            amount={toAmount}
-            onChangeAmount={onChangeToAmount}
-          />
+          <p className="text-center">
+            1 {fromCurrency} = {exchangeRate} {toCurrency}
+          </p>
         </div>
-        <p>
-          1 {fromCurrency} = {exchangeRate} {toCurrency}
-        </p>
-      </div>
+      )}
     </>
   );
 }

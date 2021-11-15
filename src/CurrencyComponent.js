@@ -1,5 +1,7 @@
 import React from "react";
-import { ReactComponent as UKLogo } from "./assets/uk.svg";
+
+import SelectMenu from "./components/selectMenu";
+// import { uKLogo } from "./assets/uk.svg";
 
 export default function CurrencyComponent(props) {
   /**
@@ -20,26 +22,51 @@ export default function CurrencyComponent(props) {
     onChangeAmount,
   } = props;
 
-  return (
-    <div>
-      <p>{isBase ? "From" : "To"}</p>
-      <select value={selectedCurrency} onChange={onChangeCurrency}>
-        {currencyOptions.map((option) => (
-          <option key={option} value={option}>
-            {option === "USD" && (
-              <div>
-                {/* <UKLogo className="country-flag" /> */}
-                USD - United Stated Dollar
-              </div>
-            )}
-            {option === "GBP" && "GBP - Great British Pound"}
-            {option === "EUR" && "EUR - Euro"}
-            {option === "ZAR" && "ZAR - South African Rand"}
-          </option>
-        ))}
-      </select>
+  const currencies = [
+    { value: "USD", name: "United States Dollar", avatar: "./assets/usa.svg" },
+    { value: "GBP", name: "Great Britain Pound", avatar: "./assets/uk.svg" },
+    { value: "EUR", name: "Euro", avatar: "./assets/eu.svg" },
+    { value: "ZAR", name: "South African Rand", avatar: "./assets/zar.svg" },
+  ];
 
-      <input type="number" value={amount} onChange={onChangeAmount} />
+  const varia = currencies.find(
+    (currency) => currency.value === selectedCurrency
+  );
+
+  return (
+    <div className="flex flex-col">
+      <p>{isBase ? "From" : "To"}</p>
+      {/* <img src={uKLogo} /> */}
+      {/* <Select
+        placeholder={selectedCurrency}
+        defaultValue={selectedCurrency}
+        options={currencies}
+        isClearable={false}
+        isSearchable={false}
+        onChange={onChangeCurrency}
+      /> */}
+      <SelectMenu
+        currencies={currencies}
+        selectedCurrency={varia}
+        onChangeCurrency={onChangeCurrency}
+      />
+
+      <input type="number" value={amount && amount} onChange={onChangeAmount} />
     </div>
   );
 }
+
+// {currencyOptions.map((option) => (
+//   <option key={option} value={option}>
+//     {option === "USD" && (
+//       <div>
+//         {/* <UKLogo className="country-flag" /> */}
+//         USD - United Stated Dollar
+//       </div>
+//     )}
+//     {option === "GBP" && "GBP - Great British Pound"}
+//     {option === "EUR" && "EUR - Euro"}
+//     {option === "ZAR" && "ZAR - South African Rand"}
+//   </option>
+// ))}
+// </Select>
