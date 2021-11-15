@@ -113,11 +113,14 @@ function App() {
 
   return (
     <>
-      <h1 className="font-bold text-blue-300 text-xl absolute top-10">
+      <h1 className="font-bold text-white text-xl absolute top-10">
         Shumba Money Exchange rate calculator
       </h1>
+
       {isLoading ? (
-        <p>Loading</p>
+        <div class="flex justify-center items-center">
+          <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-white"></div>
+        </div>
       ) : (
         <div className="container mx-auto bg-gray-50 py-4 px-8 rounded-2xl">
           <div className="mb-8 flex flex-col md:flex-row">
@@ -184,7 +187,7 @@ function App() {
               >
                 <path d="M29.4,2.65A20.85,20.85,0,0,0,8,3.64L4.92.59A2,2,0,0,0,1.5,2V13.18a2,2,0,0,0,2,2H14.67a2,2,0,0,0,1.42-3.42L13.81,9.48A13,13,0,1,1,7.68,26.56a2,2,0,0,0-2.43-1L1.43,26.66A2,2,0,0,0,.15,29.32,21,21,0,1,0,29.4,2.65Z" />
               </svg>
-              reset
+              Reset
             </button>
           </div>
         </div>
