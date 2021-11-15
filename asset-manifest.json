@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/shumba-currency-converter/static/css/main.fdd1ff97.chunk.css",
-    "main.js": "/shumba-currency-converter/static/js/main.f462ec79.chunk.js",
-    "main.js.map": "/shumba-currency-converter/static/js/main.f462ec79.chunk.js.map",
+    "main.css": "/shumba-currency-converter/static/css/main.b043070d.chunk.css",
+    "main.js": "/shumba-currency-converter/static/js/main.402b63d6.chunk.js",
+    "main.js.map": "/shumba-currency-converter/static/js/main.402b63d6.chunk.js.map",
     "runtime-main.js": "/shumba-currency-converter/static/js/runtime-main.d4615ff3.js",
     "runtime-main.js.map": "/shumba-currency-converter/static/js/runtime-main.d4615ff3.js.map",
     "static/js/2.e10839c7.chunk.js": "/shumba-currency-converter/static/js/2.e10839c7.chunk.js",
     "static/js/2.e10839c7.chunk.js.map": "/shumba-currency-converter/static/js/2.e10839c7.chunk.js.map",
     "index.html": "/shumba-currency-converter/index.html",
-    "static/css/main.fdd1ff97.chunk.css.map": "/shumba-currency-converter/static/css/main.fdd1ff97.chunk.css.map",
+    "static/css/main.b043070d.chunk.css.map": "/shumba-currency-converter/static/css/main.b043070d.chunk.css.map",
     "static/js/2.e10839c7.chunk.js.LICENSE.txt": "/shumba-currency-converter/static/js/2.e10839c7.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.d4615ff3.js",
     "static/js/2.e10839c7.chunk.js",
-    "static/css/main.fdd1ff97.chunk.css",
-    "static/js/main.f462ec79.chunk.js"
+    "static/css/main.b043070d.chunk.css",
+    "static/js/main.402b63d6.chunk.js"
   ]
 }
