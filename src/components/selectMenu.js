@@ -1,13 +1,25 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-// import { UKLogo } from "./assets/uk.svg";
 
+// Function to track classNames
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function SelectMenu(props) {
+  /**
+   * Function renders a select menu where you can pick a different currency from the dropdown
+   * recieves a props object which contains:
+   * * currencies: an array of currency objects with a currency's
+   * * * value: a currency's abbreviation
+   * * * name: full name of the currency
+   * * * symbol: the currency symbol
+   *
+   * * selectedCurrency: the currency chosen from the dropdown
+   *
+   * * onChangeCurrency: a function that notifies the parent when the selectedCurrency is changed
+   */
   const { currencies, selectedCurrency, onChangeCurrency } = props;
 
   return (

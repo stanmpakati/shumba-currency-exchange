@@ -7,16 +7,14 @@ import CurrencyComponent from "./CurrencyComponent";
 function App() {
   // Loading state indicator
   const [isLoading, setIsLoading] = useState(true);
-  // Manage an array of available currencies
-  const [currencyOptions, setCurrencyOptions] = useState([]);
   // Set Base currency
   const [fromCurrency, setFromCurrency] = useState();
-  // Set convertinng currency
+  // Set converting currency
   const [toCurrency, setToCurrency] = useState();
   // Set amount
   const [amount, setAmount] = useState(1);
   // Track amount that needs to be changed
-  const [changingBase, setchangingBaseCurrency] = useState(true);
+  const [changingBase, setChangingBaseCurrency] = useState(true);
   // Set exchange rate
   const [exchangeRate, setExchangeRate] = useState();
 
@@ -33,24 +31,18 @@ function App() {
          * * data: an array of objects with
          * * * Key: a string of the currency code
          * * * Value: exchange rate relative to the base
-         *
          * */
 
         // For currency options get list of available currencies
-        const availableCurrencies = [
-          currencyData.query.base_currency,
-          ...Object.keys(currencyData.data).filter((value) =>
-            // Limit currencies to only 4
-            ["USD", "GBP", "EUR", "ZAR"].includes(value)
-          ),
-        ];
-        setCurrencyOptions(availableCurrencies);
+        const availableCurrencies = ["USD", "GBP", "EUR", "ZAR"];
 
         // Set base currency
         setFromCurrency(currencyData.query.base_currency);
 
-        // Set converting currency
-        const convertingCurrency = availableCurrencies[1];
+        // Set converting currency as the first currency that is not the base currency
+        const convertingCurrency = availableCurrencies.find(
+          (currency) => currency !== currencyData.query.base_currency
+        );
         setToCurrency(convertingCurrency);
 
         // Set exchange rate
@@ -65,6 +57,7 @@ function App() {
   useEffect(() => {
     /*
      * function will update the exchange rate based on the selected currency
+     * tracks changes in the fromCurrency and toCurrency
      */
     if (fromCurrency && fromCurrency)
       fetch(`${API_URL}&base_currency=${fromCurrency}`)
@@ -73,8 +66,19 @@ function App() {
   }, [fromCurrency, toCurrency]);
 
   const onChangeBaseAmount = (e) => {
+    /*
+     * Function records input from the from currency input and notifies the app
+     */
     setAmount(e.target.value);
-    setchangingBaseCurrency(true);
+    setChangingBaseCurrency(true);
+  };
+
+  const onChangeToAmount = (e) => {
+    /*
+     * Function records input from the from currency input and notifies the app
+     */
+    setAmount(e.target.value);
+    setChangingBaseCurrency(false);
   };
 
   // The amount of each currency
@@ -88,11 +92,6 @@ function App() {
     toAmount = amount;
   }
 
-  const onChangeToAmount = (e) => {
-    setAmount(e.target.value);
-    setchangingBaseCurrency(false);
-  };
-
   function switchCurrencies() {
     /*
      * function To swap the to and from dropdown values
@@ -104,9 +103,11 @@ function App() {
 
   function resetAmounts() {
     /*
-     * function to
+     * function to reset the app to set the base currency as one
      */
-    setchangingBaseCurrency(true);
+    // Make the from currency the one being tracked
+    setChangingBaseCurrency(true);
+    // Change it's amount to 1
     setAmount(1);
   }
 
@@ -123,7 +124,7 @@ function App() {
             <div className="flex-grow">
               <CurrencyComponent
                 isBase={true}
-                currencyOptions={currencyOptions}
+                excludedCurrency={toCurrency}
                 selectedCurrency={fromCurrency}
                 onChangeCurrency={(data) => setFromCurrency(data.value)}
                 amount={baseAmount}
@@ -156,7 +157,7 @@ function App() {
             <div className="flex-grow">
               <CurrencyComponent
                 isBase={false}
-                currencyOptions={currencyOptions}
+                excludedCurrency={fromCurrency}
                 selectedCurrency={toCurrency}
                 onChangeCurrency={(data) => setToCurrency(data.value)}
                 amount={toAmount}
