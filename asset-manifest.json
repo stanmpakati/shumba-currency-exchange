@@ -1,20 +1,24 @@
 {
   "files": {
-    "main.css": "/shumba-currency-exchange/static/css/main.b043070d.chunk.css",
-    "main.js": "/shumba-currency-exchange/static/js/main.402b63d6.chunk.js",
-    "main.js.map": "/shumba-currency-exchange/static/js/main.402b63d6.chunk.js.map",
+    "main.css": "/shumba-currency-exchange/static/css/main.4ef44e1b.chunk.css",
+    "main.js": "/shumba-currency-exchange/static/js/main.adaa0274.chunk.js",
+    "main.js.map": "/shumba-currency-exchange/static/js/main.adaa0274.chunk.js.map",
     "runtime-main.js": "/shumba-currency-exchange/static/js/runtime-main.29f5dca9.js",
     "runtime-main.js.map": "/shumba-currency-exchange/static/js/runtime-main.29f5dca9.js.map",
     "static/js/2.e10839c7.chunk.js": "/shumba-currency-exchange/static/js/2.e10839c7.chunk.js",
     "static/js/2.e10839c7.chunk.js.map": "/shumba-currency-exchange/static/js/2.e10839c7.chunk.js.map",
     "index.html": "/shumba-currency-exchange/index.html",
-    "static/css/main.b043070d.chunk.css.map": "/shumba-currency-exchange/static/css/main.b043070d.chunk.css.map",
-    "static/js/2.e10839c7.chunk.js.LICENSE.txt": "/shumba-currency-exchange/static/js/2.e10839c7.chunk.js.LICENSE.txt"
+    "static/css/main.4ef44e1b.chunk.css.map": "/shumba-currency-exchange/static/css/main.4ef44e1b.chunk.css.map",
+    "static/js/2.e10839c7.chunk.js.LICENSE.txt": "/shumba-currency-exchange/static/js/2.e10839c7.chunk.js.LICENSE.txt",
+    "static/media/eu.3f54ee93.svg": "/shumba-currency-exchange/static/media/eu.3f54ee93.svg",
+    "static/media/sa.7593bc47.svg": "/shumba-currency-exchange/static/media/sa.7593bc47.svg",
+    "static/media/uk.2d19fed4.svg": "/shumba-currency-exchange/static/media/uk.2d19fed4.svg",
+    "static/media/usa.c29455bd.svg": "/shumba-currency-exchange/static/media/usa.c29455bd.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.29f5dca9.js",
     "static/js/2.e10839c7.chunk.js",
-    "static/css/main.b043070d.chunk.css",
-    "static/js/main.402b63d6.chunk.js"
+    "static/css/main.4ef44e1b.chunk.css",
+    "static/js/main.adaa0274.chunk.js"
   ]
 }
