@@ -114,7 +114,7 @@ function App() {
   return (
     <>
       <h1 className="font-bold text-white text-xl absolute top-10">
-        Shumba Money Exchange rate calculator
+        Shumba Money Exchange Rate Calculator
       </h1>
 
       {isLoading ? (
