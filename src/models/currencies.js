@@ -8,7 +8,7 @@ const currencies = [
   },
   {
     value: "GBP",
-    name: "Great Britain Pound",
+    name: "Great British Pound",
     avatar: "./assets/uk.svg",
     symbol: "£",
   },
