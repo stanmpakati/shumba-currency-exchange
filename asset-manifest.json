@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/shumba-currency-converter/static/css/main.b043070d.chunk.css",
-    "main.js": "/shumba-currency-converter/static/js/main.402b63d6.chunk.js",
-    "main.js.map": "/shumba-currency-converter/static/js/main.402b63d6.chunk.js.map",
-    "runtime-main.js": "/shumba-currency-converter/static/js/runtime-main.d4615ff3.js",
-    "runtime-main.js.map": "/shumba-currency-converter/static/js/runtime-main.d4615ff3.js.map",
-    "static/js/2.e10839c7.chunk.js": "/shumba-currency-converter/static/js/2.e10839c7.chunk.js",
-    "static/js/2.e10839c7.chunk.js.map": "/shumba-currency-converter/static/js/2.e10839c7.chunk.js.map",
-    "index.html": "/shumba-currency-converter/index.html",
-    "static/css/main.b043070d.chunk.css.map": "/shumba-currency-converter/static/css/main.b043070d.chunk.css.map",
-    "static/js/2.e10839c7.chunk.js.LICENSE.txt": "/shumba-currency-converter/static/js/2.e10839c7.chunk.js.LICENSE.txt"
+    "main.css": "/shumba-currency-exchange/static/css/main.b043070d.chunk.css",
+    "main.js": "/shumba-currency-exchange/static/js/main.402b63d6.chunk.js",
+    "main.js.map": "/shumba-currency-exchange/static/js/main.402b63d6.chunk.js.map",
+    "runtime-main.js": "/shumba-currency-exchange/static/js/runtime-main.29f5dca9.js",
+    "runtime-main.js.map": "/shumba-currency-exchange/static/js/runtime-main.29f5dca9.js.map",
+    "static/js/2.e10839c7.chunk.js": "/shumba-currency-exchange/static/js/2.e10839c7.chunk.js",
+    "static/js/2.e10839c7.chunk.js.map": "/shumba-currency-exchange/static/js/2.e10839c7.chunk.js.map",
+    "index.html": "/shumba-currency-exchange/index.html",
+    "static/css/main.b043070d.chunk.css.map": "/shumba-currency-exchange/static/css/main.b043070d.chunk.css.map",
+    "static/js/2.e10839c7.chunk.js.LICENSE.txt": "/shumba-currency-exchange/static/js/2.e10839c7.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.d4615ff3.js",
+    "static/js/runtime-main.29f5dca9.js",
     "static/js/2.e10839c7.chunk.js",
     "static/css/main.b043070d.chunk.css",
     "static/js/main.402b63d6.chunk.js"
