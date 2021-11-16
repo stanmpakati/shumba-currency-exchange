@@ -13,3 +13,5 @@ Or alternatively to run locally you can clone and download the project then in t
 <li><i style="font-weight: bold">`npm install`</i> to install all dependencies</li>
 <li><i style="font-weight: bold">`npm start`</i> to launch the app on <u>localhost:3000</u></li>
 </ol>
+
+<i>PS. You need an internet connection to connect to the api</i>
