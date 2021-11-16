@@ -29,11 +29,7 @@ export default function SelectMenu(props) {
           <div className="mt-1 relative">
             <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
               <span className="flex items-center">
-                {/* <img
-                  src={selectedCurrency.avatar}
-                  alt=""
-                  className="flex-shrink-0 h-6 w-6 rounded-full"
-                /> */}
+                {selectedCurrency.avatar}
                 <span className="ml-3 block truncate">
                   <strong>{selectedCurrency.value} - </strong>
                   {selectedCurrency.name}
@@ -77,11 +73,7 @@ export default function SelectMenu(props) {
                     {({ selected, active }) => (
                       <>
                         <div className="flex items-center">
-                          {/* <img
-                            src={currency.avatar}
-                            alt=""
-                            className="flex-shrink-0 h-6 w-6 rounded-full"
-                          /> */}
+                          {currency.avatar}
                           <span
                             className={classNames(
                               selected ? "font-semibold" : "font-normal",

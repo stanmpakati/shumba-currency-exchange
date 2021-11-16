@@ -1,22 +1,32 @@
+import { ReactComponent as EUIcon } from "../assets/eu.svg";
+import { ReactComponent as UKIcon } from "../assets/uk.svg";
+import { ReactComponent as USAIcon } from "../assets/usa.svg";
+import { ReactComponent as SAIcon } from "../assets/sa.svg";
+
 // A list of the currencies being used and relevant data
 const currencies = [
   {
     value: "USD",
     name: "United States Dollar",
-    avatar: "./assets/usa.svg",
+    avatar: <USAIcon className="country-flag" />,
     symbol: "$",
   },
   {
     value: "GBP",
     name: "Great British Pound",
-    avatar: "./assets/uk.svg",
+    avatar: <UKIcon className="country-flag" />,
     symbol: "£",
   },
-  { value: "EUR", name: "Euro", avatar: "./assets/eu.svg", symbol: "€" },
+  {
+    value: "EUR",
+    name: "Euro",
+    avatar: <EUIcon className="country-flag" />,
+    symbol: "€",
+  },
   {
     value: "ZAR",
     name: "South African Rand",
-    avatar: "./assets/zar.svg",
+    avatar: <SAIcon className="country-flag" />,
     symbol: "R",
   },
 ];
