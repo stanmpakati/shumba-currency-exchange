@@ -81,21 +81,21 @@ const CurrencyLogic = () => {
     setAmount(1);
   }
 
-  const onChangeBaseAmount = (e) => {
+  function onChangeBaseAmount(e) {
     /*
      * Function records input from the from currency input and notifies the app
      */
     setAmount(e.target.value);
     setChangingBaseCurrency(true);
-  };
+  }
 
-  const onChangeToAmount = (e) => {
+  function onChangeToAmount(e) {
     /*
      * Function records input from the from currency input and notifies the app
      */
     setAmount(e.target.value);
     setChangingBaseCurrency(false);
-  };
+  }
 
   function changeToCurrency(currency) {
     setToCurrency(currency);
