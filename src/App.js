@@ -16,6 +16,7 @@ function App() {
     resetAmounts,
     onChangeBaseAmount,
     onChangeToAmount,
+    clearIfFirstInput,
     changeToCurrency,
     changeFromCurrency,
   } = CurrencyLogic();
@@ -52,6 +53,7 @@ function App() {
                 onChangeCurrency={(data) => changeFromCurrency(data.value)}
                 amount={baseAmount}
                 onChangeAmount={onChangeBaseAmount}
+                clearIfFirst={clearIfFirstInput}
               />
             </div>
 
@@ -85,7 +87,7 @@ function App() {
                 onChangeCurrency={(data) => changeToCurrency(data.value)}
                 amount={toAmount}
                 onChangeAmount={onChangeToAmount}
-                className="flex-grow"
+                clearIfFirst={clearIfFirstInput}
               />
             </div>
           </div>

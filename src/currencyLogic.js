@@ -4,6 +4,8 @@ import { API_URL } from "./utils/urls";
 const CurrencyLogic = () => {
   // Loading state indicator
   const [isLoading, setIsLoading] = useState(true);
+  // Track if first time use
+  const [firstInput, setFirstInput] = useState(true);
   // Set Base currency
   const [fromCurrency, setFromCurrency] = useState();
   // Set converting currency
@@ -77,6 +79,8 @@ const CurrencyLogic = () => {
      */
     // Make the from currency the one being tracked
     setChangingBaseCurrency(true);
+    // Enable auto clearing on first input
+    setFirstInput(true);
     // Change it's amount to 1
     setAmount(1);
   }
@@ -95,6 +99,17 @@ const CurrencyLogic = () => {
      */
     setAmount(e.target.value);
     setChangingBaseCurrency(false);
+  }
+
+  function clearIfFirstInput(isBase) {
+    /*
+     * Function clears input from that form when user first clicks it
+     */
+    if (firstInput) {
+      if (!isBase) onChangeToAmount({ target: { value: "" } });
+      else onChangeBaseAmount({ target: { value: "" } });
+      setFirstInput(false);
+    }
   }
 
   function changeToCurrency(currency) {
@@ -116,6 +131,7 @@ const CurrencyLogic = () => {
     resetAmounts,
     onChangeBaseAmount,
     onChangeToAmount,
+    clearIfFirstInput,
     changeToCurrency,
     changeFromCurrency,
   };

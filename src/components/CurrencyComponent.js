@@ -24,6 +24,7 @@ export default function CurrencyComponent(props) {
     amount,
     onChangeCurrency,
     onChangeAmount,
+    clearIfFirst,
   } = props;
 
   // list of filtered currencies (excluding the currency being compared to)
@@ -49,8 +50,10 @@ export default function CurrencyComponent(props) {
         <span className="ml-2 font-bold">{currencyObject.symbol}</span>
         <input
           type="number"
+          name="amount"
           value={amount && amount}
           onChange={onChangeAmount}
+          onFocus={() => clearIfFirst(isBase)}
           className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
         />
       </div>
