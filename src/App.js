@@ -1,85 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
 
-import { API_URL } from "./utils/urls";
-import CurrencyComponent from "./CurrencyComponent";
+import CurrencyLogic from "./currencyLogic";
+import CurrencyComponent from "./components/CurrencyComponent";
 
 function App() {
-  // Loading state indicator
-  const [isLoading, setIsLoading] = useState(true);
-  // Set Base currency
-  const [fromCurrency, setFromCurrency] = useState();
-  // Set converting currency
-  const [toCurrency, setToCurrency] = useState();
-  // Set amount
-  const [amount, setAmount] = useState(1);
-  // Track amount that needs to be changed
-  const [changingBase, setChangingBaseCurrency] = useState(true);
-  // Set exchange rate
-  const [exchangeRate, setExchangeRate] = useState();
-
-  // Initialize app by fetching the currency data and notifying other components
-  useEffect(() => {
-    // Get request to the freecurrencyapi.net API
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((currencyData) => {
-        /**
-         * currencyData is an object with the following properties:
-         * * query: an array containing the api_key, timestamp and base_currency
-         * * * base: a string showing the currency being converted from
-         * * data: an array of objects with
-         * * * Key: a string of the currency code
-         * * * Value: exchange rate relative to the base
-         * */
-
-        // For currency options get list of available currencies
-        const availableCurrencies = ["USD", "GBP", "EUR", "ZAR"];
-
-        // Set base currency
-        setFromCurrency(currencyData.query.base_currency);
-
-        // Set converting currency as the first currency that is not the base currency
-        const convertingCurrency = availableCurrencies.find(
-          (currency) => currency !== currencyData.query.base_currency
-        );
-        setToCurrency(convertingCurrency);
-
-        // Set exchange rate
-        setExchangeRate(currencyData.data[convertingCurrency]);
-
-        // Is loading is false
-        setIsLoading(false);
-      });
-  }, []);
-
-  // To run after each update of the currencies' dropdown
-  useEffect(() => {
-    /*
-     * function will update the exchange rate based on the selected currency
-     * tracks changes in the fromCurrency and toCurrency
-     */
-    if (fromCurrency && fromCurrency)
-      fetch(`${API_URL}&base_currency=${fromCurrency}`)
-        .then((res) => res.json())
-        .then((currencyData) => setExchangeRate(currencyData.data[toCurrency]));
-  }, [fromCurrency, toCurrency]);
-
-  const onChangeBaseAmount = (e) => {
-    /*
-     * Function records input from the from currency input and notifies the app
-     */
-    setAmount(e.target.value);
-    setChangingBaseCurrency(true);
-  };
-
-  const onChangeToAmount = (e) => {
-    /*
-     * Function records input from the from currency input and notifies the app
-     */
-    setAmount(e.target.value);
-    setChangingBaseCurrency(false);
-  };
+  const {
+    isLoading,
+    fromCurrency,
+    toCurrency,
+    amount,
+    changingBase,
+    exchangeRate,
+    switchCurrencies,
+    resetAmounts,
+    onChangeBaseAmount,
+    onChangeToAmount,
+    changeToCurrency,
+    changeFromCurrency,
+  } = CurrencyLogic();
 
   // The amount of each currency
   let baseAmount, toAmount;
@@ -92,25 +31,6 @@ function App() {
     toAmount = amount;
   }
 
-  function switchCurrencies() {
-    /*
-     * function To swap the to and from dropdown values
-     */
-    let temp = fromCurrency;
-    setFromCurrency(toCurrency);
-    setToCurrency(temp);
-  }
-
-  function resetAmounts() {
-    /*
-     * function to reset the app to set the base currency as one
-     */
-    // Make the from currency the one being tracked
-    setChangingBaseCurrency(true);
-    // Change it's amount to 1
-    setAmount(1);
-  }
-
   return (
     <>
       <h1 className="font-bold text-white text-xl absolute top-10">
@@ -118,8 +38,8 @@ function App() {
       </h1>
 
       {isLoading ? (
-        <div class="flex justify-center items-center">
-          <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-white"></div>
+        <div className="flex justify-center items-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-white"></div>
         </div>
       ) : (
         <div className="container mx-auto bg-gray-50 py-4 px-8 rounded-2xl">
@@ -129,7 +49,7 @@ function App() {
                 isBase={true}
                 excludedCurrency={toCurrency}
                 selectedCurrency={fromCurrency}
-                onChangeCurrency={(data) => setFromCurrency(data.value)}
+                onChangeCurrency={(data) => changeFromCurrency(data.value)}
                 amount={baseAmount}
                 onChangeAmount={onChangeBaseAmount}
               />
@@ -148,8 +68,8 @@ function App() {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M6.99 11L3 15L6.99 19V16H14V14H6.99V11ZM21 9L17.01 5V8H10V10H17.01V13L21 9Z"
                     fill="#FFFFFF"
                   />
@@ -162,7 +82,7 @@ function App() {
                 isBase={false}
                 excludedCurrency={fromCurrency}
                 selectedCurrency={toCurrency}
-                onChangeCurrency={(data) => setToCurrency(data.value)}
+                onChangeCurrency={(data) => changeToCurrency(data.value)}
                 amount={toAmount}
                 onChangeAmount={onChangeToAmount}
                 className="flex-grow"
