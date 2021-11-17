@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import SelectMenu from "./selectMenu";
 import currencies from "../models/currencies";
@@ -27,6 +27,8 @@ export default function CurrencyComponent(props) {
     clearIfFirst,
   } = props;
 
+  const inputRef = useRef(null);
+
   // list of filtered currencies (excluding the currency being compared to)
   let usedCurrencyObjects = currencies.filter(
     (currency) => currency.value !== excludedCurrency
@@ -37,6 +39,12 @@ export default function CurrencyComponent(props) {
     (currency) => currency.value === selectedCurrency
   );
 
+  function clear() {
+    inputRef.current.value = "";
+    onChangeAmount({ target: { value: inputRef.current.value } });
+    inputRef.current.focus();
+  }
+
   return (
     <div className="flex flex-col">
       <p className="mb-4">{isBase ? "From" : "To"}</p>
@@ -46,26 +54,25 @@ export default function CurrencyComponent(props) {
         onChangeCurrency={onChangeCurrency}
       />
 
-      <form>
-        <div className="mt-2 flex items-center border-b border-green-500 py-2">
-          <span className="ml-2 font-bold">{currencyObject.symbol}</span>
-          <input
-            type="number"
-            name="amount"
-            value={amount && amount}
-            onChange={onChangeAmount}
-            onFocus={() => clearIfFirst(isBase)}
-            className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-          />
-          <button
-            className="flex items-center hover:bg-gray-200 px-2 py-1"
-            type="reset"
-            onClick={() => onChangeAmount({ target: { value: "" } })}
-          >
-            &times;
-          </button>
-        </div>
-      </form>
+      <div className="mt-2 flex items-center border-b border-green-500 py-2">
+        <span className="ml-2 font-bold">{currencyObject.symbol}</span>
+        <input
+          type="number"
+          name="amount"
+          value={amount && amount}
+          onChange={onChangeAmount}
+          onFocus={() => clearIfFirst(isBase)}
+          ref={inputRef}
+          className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+        />
+        <button
+          className="flex items-center hover:bg-gray-200 px-2 py-1"
+          type="reset"
+          onClick={clear}
+        >
+          &times;
+        </button>
+      </div>
     </div>
   );
 }
