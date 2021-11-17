@@ -46,17 +46,26 @@ export default function CurrencyComponent(props) {
         onChangeCurrency={onChangeCurrency}
       />
 
-      <div className="mt-2 flex items-center border-b border-green-500 py-2">
-        <span className="ml-2 font-bold">{currencyObject.symbol}</span>
-        <input
-          type="number"
-          name="amount"
-          value={amount && amount}
-          onChange={onChangeAmount}
-          onFocus={() => clearIfFirst(isBase)}
-          className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
-        />
-      </div>
+      <form>
+        <div className="mt-2 flex items-center border-b border-green-500 py-2">
+          <span className="ml-2 font-bold">{currencyObject.symbol}</span>
+          <input
+            type="number"
+            name="amount"
+            value={amount && amount}
+            onChange={onChangeAmount}
+            onFocus={() => clearIfFirst(isBase)}
+            className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+          />
+          <button
+            className="flex items-center hover:bg-gray-200 px-2 py-1"
+            type="reset"
+            onClick={() => onChangeAmount({ target: { value: "" } })}
+          >
+            &times;
+          </button>
+        </div>
+      </form>
     </div>
   );
 }
