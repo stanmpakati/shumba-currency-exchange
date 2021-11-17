@@ -26,9 +26,9 @@ function App() {
   // Changing amount of each text field based on which one was updated by the user
   if (changingBase) {
     baseAmount = amount;
-    toAmount = amount * exchangeRate;
+    toAmount = +(amount * exchangeRate).toFixed(2);
   } else {
-    baseAmount = amount / exchangeRate;
+    baseAmount = +(amount / exchangeRate).toFixed(2);
     toAmount = amount;
   }
 
